@@ -3,6 +3,10 @@ import json
 import requests
 
 
+class SRError(Exception):
+    ...
+
+
 def get_tournaments():
     url = 'https://cp.fn.sportradar.com/common/en/Etc:UTC/gismo/config_tournaments/1/17'  # noqa
     rv = requests.get(url)
@@ -10,7 +14,8 @@ def get_tournaments():
         rv_stringified_json = rv.content.decode('utf8').replace("'", '"')
         return parse_tournaments(json.loads(rv_stringified_json))
     else:
-        print('Error while making a request, please try again later.')
+        print(f'Failed to get tournaments: {rv.status_code}.')
+    raise SRError('Failed to get tournaments')
 
 
 def parse_tournaments(metadata):
