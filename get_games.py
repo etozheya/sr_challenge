@@ -30,18 +30,47 @@ def parse_games(metadata):
     parsed_games = []
     for m in list(metadata['doc'][0]['data']['matches'].values()):
         parsed_games.append(serialize_game(m))
-    return parsed_games[:5]
+    return sort_games_by_time(parsed_games)
 
 
 def serialize_game(game):
-    """
-    Only '_tld' and 'name' fields are passed further.
-    Any other data is not valuable for the given task.
-    """
     serialized = {}
     for k, v in game.items():
         if k in ('_tid', 'round'):
             serialized[k] = v
         if k == 'time':
             serialized['timestamp'] = v['uts']
+        if k == 'result':
+            serialized['full_time_score'] = {
+                'home': v['home'], 'away': v['away']}
+        if k == 'periods':
+            if v is not None:  # some games don't have half-time data ¯\_(ツ)_/¯
+                serialized['half_time_score'] = v['p1']
+        if k == 'teams':
+            serialized['home_team_name'] = v['home']['name']
+            serialized['away_team_name'] = v['away']['name']
+        if k == 'comment':
+            serialized['goals'] = serialize_comment(v)
     return serialized
+
+
+def serialize_comment(comment):
+    serialized = []
+    if not comment:
+        return None
+    goals = comment.split(', ')
+    for goal in goals:
+        serialized_goal = {}
+        goal_data = goal.split(' ')
+        serialized_goal['goalscorer_name'] = goal_data[2]
+        serialized_goal['goal_minute'] = (goal_data[1])[1:-1]
+        serialized_goal['new_score'] = goal_data[0]
+        serialized.append(serialized_goal)
+    return serialized
+
+
+def sort_games_by_time(games):
+    """
+    Function returns list of games from newest to oldest.
+    """
+    return sorted(games, key=lambda g: g['timestamp'], reverse=True)
