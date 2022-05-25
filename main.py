@@ -19,10 +19,18 @@ def get_tournaments():
 
 
 def parse_tournaments(metadata):
-    parsed_tournaments = {}
+    parsed_tournaments = []
     for t in metadata['doc'][0]['data']['tournaments']:
-        parsed_tournaments[t['name']] = t
+        parsed_tournaments.append(serialize_tournament(t))
     return parsed_tournaments
+
+
+def serialize_tournament(tournament):
+    serialized = {}
+    for k, v in tournament.items():
+        if k in ('_tid', 'name'):
+            serialized[k] = v
+    return serialized
 
 
 def get_last_games_for_all_tournaments(tournaments):
@@ -40,7 +48,7 @@ def main():
     tournaments = get_tournaments()
     # print('Here is a list of available tournaments:')
     # print(list(tournaments.keys()))
-    _ = get_last_games_for_all_tournaments(tournaments)
+    # _ = get_last_games_for_all_tournaments(tournaments)
     print(tournaments)
 
 
