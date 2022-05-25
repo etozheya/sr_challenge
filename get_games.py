@@ -20,7 +20,7 @@ def get_last_games_for_tournament(tournament_id):
     rv = requests.get(url)
     if rv.status_code == 200:
         rv_stringified_json = rv.content.decode('utf8').replace("'", '"')
-        return parse_games(json.loads(rv_stringified_json))
+        return parse_games(json.loads(rv_stringified_json))[:5]
     else:
         print(f'Failed to get games: {rv.status_code}.')
     raise SRError('Failed to get games')
@@ -35,6 +35,8 @@ def parse_games(metadata):
 
 def serialize_game(game):
     serialized = {}
+    if game['canceled']:
+        return None
     for k, v in game.items():
         if k in ('_tid', 'round'):
             serialized[k] = v
@@ -73,4 +75,5 @@ def sort_games_by_time(games):
     """
     Function returns list of games from newest to oldest.
     """
-    return sorted(games, key=lambda g: g['timestamp'], reverse=True)
+    non_cancelled = [g for g in games if g]
+    return sorted(non_cancelled, key=lambda g: g['timestamp'], reverse=True)
