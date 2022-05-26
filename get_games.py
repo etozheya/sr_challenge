@@ -19,8 +19,8 @@ def get_last_games_for_tournament(tournament_id):
     url = f'https://cp.fn.sportradar.com/common/en/Etc:UTC/gismo/fixtures_tournament/{tournament_id}/2021'  # noqa
     rv = requests.get(url)
     if rv.status_code == 200:
-        rv_stringified_json = rv.content.decode('utf8').replace("'", '"')
-        return parse_games(json.loads(rv_stringified_json))[:5]
+        games = parse_games(json.loads(rv.content))[:5]
+        return games
     else:
         print(f'Failed to get games: {rv.status_code}.')
     raise SRError('Failed to get games')
