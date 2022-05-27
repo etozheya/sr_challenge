@@ -7,19 +7,20 @@ class SRError(Exception):
     ...
 
 
-def get_last_games_for_all_tournaments(tournaments):
+def get_last_games_for_all_tournaments(tournaments, number_of_games):
     last_games = {}
     for t in tournaments:
         tournament_id = t['_tid']
-        last_games[t['name']] = get_last_games_for_tournament(tournament_id)
+        last_games[t['name']] = get_last_games_for_tournament(
+            tournament_id, number_of_games)
     return last_games
 
 
-def get_last_games_for_tournament(tournament_id):
+def get_last_games_for_tournament(tournament_id, number_of_games):
     url = f'https://cp.fn.sportradar.com/common/en/Etc:UTC/gismo/fixtures_tournament/{tournament_id}/2021'  # noqa
     rv = requests.get(url)
     if rv.status_code == 200:
-        games = parse_games(json.loads(rv.content))[:5]
+        games = parse_games(json.loads(rv.content))[:number_of_games]
         return games
     else:
         print(f'Failed to get games: {rv.status_code}.')
