@@ -3,6 +3,7 @@ from get_games import get_last_games_for_all_tournaments
 
 
 def main(tournaments_input, number_of_games):
+    # TODO check for input number
     available_tournaments = get_tournaments.get()
     # print('Here is a list of available tournaments:')
     # print([t['name'] for t in available_tournaments])

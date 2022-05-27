@@ -23,8 +23,7 @@ def get_last_games_for_tournament(tournament_id, number_of_games):
         games = parse_games(json.loads(rv.content))[:number_of_games]
         return games
     else:
-        print(f'Failed to get games: {rv.status_code}.')
-    raise SRError('Failed to get games')
+        raise SRError('Failed to get games')
 
 
 def parse_games(metadata):
