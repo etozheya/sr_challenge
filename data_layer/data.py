@@ -1,5 +1,5 @@
-import get_tournaments
-from get_games import get_last_games_for_all_tournaments
+from data_layer import get_tournaments
+from data_layer.get_games import get_last_games_for_all_tournaments
 
 
 class UserInputError(Exception):

@@ -1,4 +1,4 @@
-import data
+from data_layer import data
 import pytest
 
 

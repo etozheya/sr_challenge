@@ -1,4 +1,4 @@
-import get_tournaments
+from data_layer import get_tournaments
 
 
 def test_parse(monkeypatch):

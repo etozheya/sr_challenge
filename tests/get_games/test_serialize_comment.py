@@ -1,4 +1,4 @@
-import get_games
+from data_layer import get_games
 from tests import rnd_int, rnd_string
 
 

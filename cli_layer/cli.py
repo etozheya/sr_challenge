@@ -3,7 +3,7 @@ from datetime import datetime
 
 import click
 
-import data
+from data_layer import data
 
 
 def deserialize_game(game):

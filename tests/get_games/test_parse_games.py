@@ -1,4 +1,4 @@
-import get_games
+from data_layer import get_games
 
 
 def test_parse(monkeypatch):

@@ -1,7 +1,7 @@
 import pytest
 import requests
 
-import get_games
+from data_layer import get_games
 from tests import rnd_string, rnd_int
 
 

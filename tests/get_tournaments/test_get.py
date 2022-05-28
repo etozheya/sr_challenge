@@ -1,7 +1,7 @@
 import pytest
 import requests
 
-import get_tournaments
+from data_layer import get_tournaments
 
 
 class MockResponse:
