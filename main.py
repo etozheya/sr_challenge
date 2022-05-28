@@ -19,7 +19,3 @@ def main(tournaments_input, number_of_games):
     # for g in games.values():
     #     print(g)
     return games
-
-
-if __name__ == '__main__':
-    main(None, 5)
