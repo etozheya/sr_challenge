@@ -40,19 +40,25 @@ def serialize_game(game):
     for k, v in game.items():
         if k in ('_tid', 'round'):
             serialized[k] = v
+            continue
         if k == 'time':
             serialized['timestamp'] = v['uts']
+            continue
         if k == 'result':
             serialized['full_time_score'] = {
                 'home': v['home'], 'away': v['away']}
+            continue
         if k == 'periods':
             if v is not None:  # some games don't have half-time data ¯\_(ツ)_/¯
                 serialized['half_time_score'] = v['p1']
+            continue
         if k == 'teams':
             serialized['home_team_name'] = v['home']['name']
             serialized['away_team_name'] = v['away']['name']
+            continue
         if k == 'comment':
             serialized['goals'] = serialize_comment(v)
+            continue
     return serialized
 
 
