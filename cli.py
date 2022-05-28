@@ -20,6 +20,10 @@ def deserialize_game(game):
             click.echo(
                 f'{goal["goal_minute"]} `{goal["new_score"]}`'
                 f' {goal["goalscorer_name"]}')
+    else:
+        if game["full_time_score"]["home"] > 0 or game[
+                "full_time_score"]["away"] > 0:
+            click.echo('Goals data is invalid for this game.')
     click.echo()
 
 
