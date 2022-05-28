@@ -14,8 +14,7 @@ def get():
         rv_stringified_json = rv.content.decode('utf8').replace("'", '"')
         return parse_tournaments(json.loads(rv_stringified_json))
     else:
-        print(f'Failed to get tournaments: {rv.status_code}.')
-    raise SRError('Failed to get tournaments')
+        raise SRError('Failed to get tournaments')
 
 
 def parse_tournaments(metadata):

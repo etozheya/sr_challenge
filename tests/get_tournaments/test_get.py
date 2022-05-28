@@ -1,8 +1,7 @@
 import pytest
 import requests
 
-import get_games
-from tests import rnd_string, rnd_int
+import get_tournaments
 
 
 class MockResponse:
@@ -23,9 +22,10 @@ def test_get(monkeypatch):
         return MockResponse()
 
     monkeypatch.setattr(requests, 'get', mock_get)
-    monkeypatch.setattr(get_games, 'parse_games', lambda *_: 'games')
-    result = get_games.get_last_games_for_tournament(rnd_string(), rnd_int())
-    assert result == 'games'
+    monkeypatch.setattr(
+        get_tournaments, 'parse_tournaments', lambda *_: 'tournaments')
+    result = get_tournaments.get()
+    assert result == 'tournaments'
 
 
 def test_sr_error(monkeypatch):
@@ -33,7 +33,5 @@ def test_sr_error(monkeypatch):
         return MockResponse(status_code=500)
 
     monkeypatch.setattr(requests, 'get', mock_get)
-    monkeypatch.setattr(get_games, 'parse_games', lambda *_: 'games')
-    with pytest.raises(get_games.SRError):
-        _ = get_games.get_last_games_for_tournament(
-            rnd_string(), rnd_int())
+    with pytest.raises(get_tournaments.SRError):
+        _ = get_tournaments.get()
