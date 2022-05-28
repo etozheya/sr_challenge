@@ -1,7 +1,26 @@
 #!/usr/bin/env python
+from datetime import datetime
+
 import click
 
 import data
+
+
+def deserialize_game(game):
+    click.echo(
+        f'Round {game["round"]}.'
+        f' {str(datetime.utcfromtimestamp(game["timestamp"]))[:-3]}')
+    click.echo(
+        f'{game["home_team_name"]} : {game["away_team_name"]} -'
+        f' {game["full_time_score"]["home"]}:{game["full_time_score"]["away"]}'
+        f' ({game["half_time_score"]["home"]}:{game["half_time_score"]["away"]}'
+        f')')
+    if game.get('goals'):
+        for goal in game['goals']:
+            click.echo(
+                f'{goal["goal_minute"]} `{goal["new_score"]}`'
+                f' {goal["goalscorer_name"]}')
+    click.echo()
 
 
 @click.command()
@@ -23,8 +42,13 @@ def main(number_of_games, tournament):
     e.g. cli.py -n 10 -t 'Regular Season' -t 'OFB Cup'
         - to get 10 last games for each of provided tournaments.
     """
-    games = data.main(list(tournament), number_of_games)
-    click.echo(games)
+    games = data.main(tournament, number_of_games)
+    for k, v in games.items():
+        click.echo(f'{k} last {number_of_games} games:')
+        click.echo()
+        for game in v:
+            deserialize_game(game)
+        click.echo()
 
 
 if __name__ == '__main__':

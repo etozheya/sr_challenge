@@ -1,5 +1,3 @@
-import json
-
 import get_tournaments
 from get_games import get_last_games_for_all_tournaments
 
@@ -19,8 +17,9 @@ def main(tournaments_input, number_of_games):
         tournaments = []
         for ti in tournaments_input:
             found = [at for at in available_tournaments if at['name'] == ti]
+            tournaments.append(found[0])
             if not found:
                 raise UserInputError(
                     f'You entered invalid tournament name: {ti}')
     games = get_last_games_for_all_tournaments(tournaments, number_of_games)
-    return json.dumps(games)
+    return games
