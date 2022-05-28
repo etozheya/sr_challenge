@@ -48,7 +48,7 @@ def main(number_of_games, tournament):
     """
     games = data.main(tournament, number_of_games)
     for k, v in games.items():
-        click.echo(f'{k} last {number_of_games} games:')
+        click.echo(f'{k} last {min(number_of_games, len(v))} games:')
         click.echo()
         for game in v:
             deserialize_game(game)
