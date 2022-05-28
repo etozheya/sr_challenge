@@ -1,4 +1,4 @@
-import main
+import data
 
 
 def test_not_custom(monkeypatch):

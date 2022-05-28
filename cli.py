@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import click
 
-import main
+import data
 
 
 @click.command()
@@ -17,9 +17,14 @@ def main(number_of_games, tournament):
     Script returns given number of last games
     for the given list of tournaments.
 
-    e.g. cli.py -n 10 -t 'Regular Season' -t
+    e.g. cli.py
+        - to get 5 last games for each available tournament;
+
+    e.g. cli.py -n 10 -t 'Regular Season' -t 'OFB Cup'
+        - to get 10 last games for each of provided tournaments.
     """
-    main.data(list(tournament), number_of_games)
+    games = data.main(list(tournament), number_of_games)
+    click.echo(games)
 
 
 if __name__ == '__main__':
