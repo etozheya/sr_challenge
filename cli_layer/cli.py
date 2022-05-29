@@ -1,19 +1,21 @@
 #!/usr/bin/env python
 import sys
 import os
-from pathlib import Path
-from datetime import datetime
-
-import click
-
-from data_layer import data, get_tournaments
-
 
 myDir = os.getcwd()
 sys.path.append(myDir)
+
+from pathlib import Path
+
 path = Path(myDir)
 a = str(path.parent.absolute())
+
 sys.path.append(a)
+from datetime import datetime
+
+from data_layer import data, get_tournaments
+
+import click
 
 
 def deserialize_game(game, is_am_pm_format):
