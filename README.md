@@ -1,5 +1,10 @@
 # SportRadar Coding Challenge
 
+* [Tasks](#Tasks)
+* [Implementations](#Implementation)
+* [Testing](#Testing)
+* [How to use](#How to use)
+
 ## Tasks
 
 * Implement a middleware that returns information about the last five sport matches with normalized data. The application interface can be used in various widgets that offer short statistics.
