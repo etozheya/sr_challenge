@@ -83,7 +83,7 @@ Data layer returns JSON-formatted data which CLI layer accepts and deserializes 
 
 ![](cov.png)
 
-## How to use
+## How_to_use
 
 ### Prerequisites
 
