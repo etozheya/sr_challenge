@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import sys
 from datetime import datetime
 
 import click
@@ -46,14 +47,14 @@ def main(number_of_games, tournament):
     e.g. cli.py -n 10 -t 'Regular Season' -t 'OFB Cup'
         - to get 10 last games for each of provided tournaments.
     """
-    games = data.main(tournament, number_of_games)
+    try:
+        games = data.main(tournament, number_of_games)
+    except Exception as e:
+        click.echo(f'Unexpected error: {e}.')
+        sys.exit(1)
     for k, v in games.items():
         click.echo(f'{k} last {min(number_of_games, len(v))} games:')
         click.echo()
         for game in v:
             deserialize_game(game)
         click.echo()
-
-
-if __name__ == '__main__':
-    main()
