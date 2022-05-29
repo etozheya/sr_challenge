@@ -82,8 +82,8 @@ Data layer returns JSON-formatted data which CLI layer accepts and deserializes 
 
 ### Prerequisites
 
-* Some computer
-* Python installed on it
+* A computer
+* [Python](https://www.python.org/downloads/) installed on it
 
 ### Steps to follow
 
@@ -97,3 +97,5 @@ Data layer returns JSON-formatted data which CLI layer accepts and deserializes 
   * ```python ./cli_layer/cli.py -h``` or ```./cli_layer/cli.py -h``` if you are using Mac
 * Run the script:
   * ```python ./cli_layer/cli.py```
+
+by: [Nikita Zhdankin](https://www.linkedin.com/in/nikita-zhdankin/)
