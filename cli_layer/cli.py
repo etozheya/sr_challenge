@@ -13,7 +13,10 @@ from datetime import datetime
 
 import click
 
-from data_layer import data
+from data_layer import data, get_tournaments
+
+
+# TODO show available tournaments
 
 
 def deserialize_game(game):
@@ -37,13 +40,21 @@ def deserialize_game(game):
     click.echo()
 
 
+def get_available_tournaments():
+    available_tournaments = []
+    for t in get_tournaments.get():
+        available_tournaments.append(list(t.items())[1][1])
+    return available_tournaments
+
+
 @click.command()
 @click.option(
     '-n', '--number-of-games', default=5, show_default=True, type=int,
     help='Number of last games for the tournament(s).')
 @click.option(
     '-t', '--tournament', type=str, multiple=True, default=[],
-    help='Tournament name. Possible to pass multiple tournaments.')
+    help='Tournament name. Possible to pass multiple tournaments.'
+         f' Available tournaments: {get_available_tournaments()}')
 @click.help_option('-h', '--help')
 def main(number_of_games, tournament):
     """
@@ -56,6 +67,7 @@ def main(number_of_games, tournament):
     e.g. cli.py -n 10 -t 'Regular Season' -t 'OFB Cup'\n
         - to get 10 last games for each of provided tournaments.
     """
+    # TODO option pm/am
     try:
         games = data.main(tournament, number_of_games)
     except Exception as e:
