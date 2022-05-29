@@ -93,7 +93,7 @@ Data layer returns JSON-formatted data which CLI layer accepts and deserializes 
   * ```env\Scripts\activate``` or ```source env/bin/activate``` if you are using Mac
 * Install required libraries:
   * ```pip install -r requirements.txt```
-* (Optional) Get more information on the script usageL
+* (Optional) Get more information on the script usage:
   * ```./cli_layer/cli.py -h```
 * Run the script:
   * ```./cli_layer/cli.py```
