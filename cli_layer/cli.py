@@ -19,10 +19,18 @@ from data_layer import data, get_tournaments
 # TODO show available tournaments
 
 
-def deserialize_game(game):
-    click.echo(
-        f'Round {game["round"]}.'
-        f' {str(datetime.utcfromtimestamp(game["timestamp"]))[:-3]}')
+def deserialize_game(game, is_am_pm_format):
+    time = str(datetime.utcfromtimestamp(game["timestamp"]))[:-3]
+    if is_am_pm_format:
+        hours = int(time[11:13])
+        if hours > 11:
+            if hours > 12:
+                time = time[:11] + str(hours - 12) + time[13:] + ' PM'
+            else:
+                time += ' PM'
+        else:
+            time += ' AM'
+    click.echo(f'Round {game["round"]}. {time}')
     click.echo(
         f'{game["home_team_name"]} : {game["away_team_name"]} -'
         f' {game["full_time_score"]["home"]}:{game["full_time_score"]["away"]}'
@@ -55,8 +63,11 @@ def get_available_tournaments():
     '-t', '--tournament', type=str, multiple=True, default=[],
     help='Tournament name. Possible to pass multiple tournaments.'
          f' Available tournaments: {get_available_tournaments()}')
+@click.option(
+    '-f', '--time-format', default=False, show_default=True, type=bool,
+    help='Use 12 hour format (AM, PM) insted of 24 hour format.')
 @click.help_option('-h', '--help')
-def main(number_of_games, tournament):
+def main(number_of_games, tournament, time_format):
     """
     Script returns given number of last games
     for the given list of tournaments.
@@ -77,7 +88,7 @@ def main(number_of_games, tournament):
         click.echo(f'{k} last {min(number_of_games, len(v))} games:')
         click.echo()
         for game in v:
-            deserialize_game(game)
+            deserialize_game(game, time_format)
         click.echo()
 
 
