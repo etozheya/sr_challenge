@@ -50,10 +50,10 @@ def main(number_of_games, tournament):
     Script returns given number of last games
     for the given list of tournaments.
 
-    e.g. cli.py
+    e.g. cli.py\n
         - to get 5 last games for each available tournament;
 
-    e.g. cli.py -n 10 -t 'Regular Season' -t 'OFB Cup'
+    e.g. cli.py -n 10 -t 'Regular Season' -t 'OFB Cup'\n
         - to get 10 last games for each of provided tournaments.
     """
     try:
