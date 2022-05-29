@@ -94,6 +94,6 @@ Data layer returns JSON-formatted data which CLI layer accepts and deserializes 
 * Install required libraries:
   * ```pip install -r requirements.txt```
 * (Optional) Get more information on the script usage:
-  * ```./cli_layer/cli.py -h```
+  * ```python ./cli_layer/cli.py -h``` or ```./cli_layer/cli.py -h``` if you are using Mac
 * Run the script:
-  * ```./cli_layer/cli.py```
+  * ```python ./cli_layer/cli.py```
