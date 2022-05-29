@@ -58,3 +58,7 @@ def main(number_of_games, tournament):
         for game in v:
             deserialize_game(game)
         click.echo()
+
+
+if __name__ == '__main__':
+    main()
