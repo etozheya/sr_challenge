@@ -1,5 +1,10 @@
 # SportRadar Coding Challenge
 
+* [Tasks](#Tasks)
+* [Implementations](#Implementation)
+* [Testing](#Testing)
+* [How to use](#How_to_use)
+
 ## Tasks
 
 * Implement a middleware that returns information about the last five sport matches with normalized data. The application interface can be used in various widgets that offer short statistics.
@@ -78,12 +83,12 @@ Data layer returns JSON-formatted data which CLI layer accepts and deserializes 
 
 ![](cov.png)
 
-## How to use
+## How_to_use
 
 ### Prerequisites
 
-* Some computer
-* Python installed on it
+* A computer
+* [Python](https://www.python.org/downloads/) installed on it
 
 ### Steps to follow
 
@@ -97,3 +102,5 @@ Data layer returns JSON-formatted data which CLI layer accepts and deserializes 
   * ```python ./cli_layer/cli.py -h``` or ```./cli_layer/cli.py -h``` if you are using Mac
 * Run the script:
   * ```python ./cli_layer/cli.py```
+
+by: [Nikita Zhdankin](https://www.linkedin.com/in/nikita-zhdankin/)
