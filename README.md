@@ -3,7 +3,7 @@
 * [Tasks](#Tasks)
 * [Implementations](#Implementation)
 * [Testing](#Testing)
-1. [How to use](#How to use)
+* [How to use](#How_to_use)
 
 ## Tasks
 
